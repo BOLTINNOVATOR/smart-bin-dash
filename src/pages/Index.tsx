@@ -4,6 +4,7 @@ import { Footer } from '@/components/Layout/Footer';
 import { Home } from '@/pages/Home';
 import { Demo } from '@/pages/Demo';
 import { Citizen } from '@/pages/Citizen';
+import { Admin } from '@/pages/Admin';
 
 export default function Index() {
   const { currentPage } = useAppStore();
@@ -19,7 +20,7 @@ export default function Index() {
       case '/collector':
         return <div className="min-h-screen py-8 px-4 text-center"><h1 className="text-3xl">Collector App - Coming Soon</h1></div>;
       case '/admin':
-        return <div className="min-h-screen py-8 px-4 text-center"><h1 className="text-3xl">Admin Dashboard - Coming Soon</h1></div>;
+        return <Admin />;
       case '/docs':
         return <div className="min-h-screen py-8 px-4 text-center"><h1 className="text-3xl">API Documentation - Coming Soon</h1></div>;
       case '/about':
