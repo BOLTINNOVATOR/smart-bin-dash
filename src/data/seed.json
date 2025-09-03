@@ -1,0 +1,470 @@
+{
+  "households": [
+    {
+      "id": "hh-001",
+      "name": "Sharma Family",
+      "address": "A-101, Green Valley Society, Sector 12, Delhi",
+      "ward": "Ward 12",
+      "society": "Green Valley Society",
+      "contactPhone": "+91-9876543210",
+      "binId": "bin-001",
+      "segregationScore": 94,
+      "monthlyWaste": {
+        "wet": 45.2,
+        "dry": 12.8,
+        "hazardous": 2.1
+      },
+      "rewardPoints": 285,
+      "badges": ["Waste Warrior", "Plastic Buster"],
+      "joinedDate": "2023-08-15"
+    },
+    {
+      "id": "hh-002", 
+      "name": "Gupta Family",
+      "address": "B-205, Eco Homes, Sector 15, Delhi",
+      "ward": "Ward 15",
+      "society": "Eco Homes",
+      "contactPhone": "+91-9876543211",
+      "binId": "bin-002",
+      "segregationScore": 87,
+      "monthlyWaste": {
+        "wet": 38.7,
+        "dry": 15.3,
+        "hazardous": 1.8
+      },
+      "rewardPoints": 245,
+      "badges": ["Eco Champion"],
+      "joinedDate": "2023-09-02"
+    },
+    {
+      "id": "hh-003",
+      "name": "Singh Family", 
+      "address": "C-302, Smart City Apartments, Sector 18, Delhi",
+      "ward": "Ward 18",
+      "society": "Smart City Apartments",
+      "contactPhone": "+91-9876543212",
+      "binId": "bin-003",
+      "segregationScore": 91,
+      "monthlyWaste": {
+        "wet": 52.1,
+        "dry": 18.9,
+        "hazardous": 2.3
+      },
+      "rewardPoints": 320,
+      "badges": ["Waste Warrior", "Green Guardian"],
+      "joinedDate": "2023-07-20"
+    },
+    {
+      "id": "hh-004",
+      "name": "Patel Family",
+      "address": "D-45, Sustainable Living Complex, Sector 22, Delhi", 
+      "ward": "Ward 22",
+      "society": "Sustainable Living Complex",
+      "contactPhone": "+91-9876543213",
+      "binId": "bin-004",
+      "segregationScore": 96,
+      "monthlyWaste": {
+        "wet": 41.3,
+        "dry": 11.2,
+        "hazardous": 1.5
+      },
+      "rewardPoints": 410,
+      "badges": ["Waste Warrior", "Plastic Buster", "Eco Champion", "Zero Waste Hero"],
+      "joinedDate": "2023-06-10"
+    },
+    {
+      "id": "hh-005",
+      "name": "Kumar Family",
+      "address": "E-67, Green Tech Society, Sector 25, Delhi",
+      "ward": "Ward 25", 
+      "society": "Green Tech Society",
+      "contactPhone": "+91-9876543214",
+      "binId": "bin-005",
+      "segregationScore": 89,
+      "monthlyWaste": {
+        "wet": 47.8,
+        "dry": 14.6,
+        "hazardous": 2.0
+      },
+      "rewardPoints": 265,
+      "badges": ["Green Guardian"],
+      "joinedDate": "2023-08-30"
+    }
+  ],
+  "collectors": [
+    {
+      "id": "col-001",
+      "name": "Rajesh Kumar",
+      "phone": "+91-9876540001",
+      "vehicleNumber": "DL-8C-1234",
+      "ward": "Ward 12, Ward 15",
+      "activeRoute": "route-001",
+      "status": "active",
+      "todayPickups": 12,
+      "totalPickups": 1456
+    },
+    {
+      "id": "col-002",
+      "name": "Suresh Yadav", 
+      "phone": "+91-9876540002",
+      "vehicleNumber": "DL-8C-5678",
+      "ward": "Ward 18, Ward 22",
+      "activeRoute": "route-002",
+      "status": "active", 
+      "todayPickups": 8,
+      "totalPickups": 1203
+    },
+    {
+      "id": "col-003",
+      "name": "Amit Singh",
+      "phone": "+91-9876540003", 
+      "vehicleNumber": "DL-8C-9012",
+      "ward": "Ward 25, Ward 28",
+      "activeRoute": "route-003",
+      "status": "break",
+      "todayPickups": 15,
+      "totalPickups": 1687
+    }
+  ],
+  "routes": [
+    {
+      "id": "route-001",
+      "name": "Green Valley - Eco Homes Circuit",
+      "collectorId": "col-001",
+      "binIds": ["bin-001", "bin-002", "bin-006", "bin-007"],
+      "estimatedTime": "2.5 hours",
+      "distance": "12.3 km",
+      "status": "in-progress",
+      "startTime": "06:00",
+      "endTime": "08:30",
+      "days": ["Monday", "Wednesday", "Friday"],
+      "wasteTypes": ["wet", "dry"]
+    },
+    {
+      "id": "route-002", 
+      "name": "Smart City - Sustainable Living Circuit",
+      "collectorId": "col-002",
+      "binIds": ["bin-003", "bin-004", "bin-008", "bin-009"],
+      "estimatedTime": "3.0 hours",
+      "distance": "15.7 km", 
+      "status": "scheduled",
+      "startTime": "07:00",
+      "endTime": "10:00",
+      "days": ["Tuesday", "Thursday", "Saturday"],
+      "wasteTypes": ["wet", "dry", "hazardous"]
+    },
+    {
+      "id": "route-003",
+      "name": "Green Tech Society Circuit",
+      "collectorId": "col-003", 
+      "binIds": ["bin-005", "bin-010", "bin-011", "bin-012"],
+      "estimatedTime": "2.8 hours",
+      "distance": "14.1 km",
+      "status": "completed",
+      "startTime": "05:30", 
+      "endTime": "08:18",
+      "days": ["Monday", "Wednesday", "Friday"],
+      "wasteTypes": ["wet", "dry"]
+    }
+  ],
+  "complaints": [
+    {
+      "id": "comp-001",
+      "householdId": "hh-001",
+      "type": "missed_pickup",
+      "priority": "medium",
+      "status": "resolved",
+      "description": "Wet waste collection was missed on scheduled day",
+      "location": {
+        "lat": 28.7041,
+        "lng": 77.1025,
+        "address": "A-101, Green Valley Society, Sector 12, Delhi"
+      },
+      "imageUrl": "/placeholder-complaint-1.jpg",
+      "submittedAt": "2024-01-15T09:30:00Z",
+      "resolvedAt": "2024-01-15T14:20:00Z",
+      "assignedTo": "col-001",
+      "resolution": "Pickup completed, collection schedule updated"
+    },
+    {
+      "id": "comp-002",
+      "householdId": "hh-003", 
+      "type": "bin_overflow",
+      "priority": "high",
+      "status": "in_progress",
+      "description": "Community bin overflowing, attracting stray animals",
+      "location": {
+        "lat": 28.7038,
+        "lng": 77.1022,
+        "address": "Block C, Smart City Apartments, Sector 18, Delhi"
+      },
+      "imageUrl": "/placeholder-complaint-2.jpg",
+      "submittedAt": "2024-01-16T11:45:00Z",
+      "assignedTo": "col-002"
+    },
+    {
+      "id": "comp-003",
+      "householdId": "hh-002",
+      "type": "waste_mixing",
+      "priority": "low", 
+      "status": "open",
+      "description": "Neighbor mixing wet and dry waste in common bin",
+      "location": {
+        "lat": 28.7045,
+        "lng": 77.1028,
+        "address": "B-205, Eco Homes, Sector 15, Delhi"
+      },
+      "submittedAt": "2024-01-16T16:20:00Z"
+    }
+  ],
+  "pickupLogs": [
+    {
+      "id": "log-001",
+      "binId": "bin-001",
+      "collectorId": "col-001",
+      "routeId": "route-001",
+      "wasteType": "wet",
+      "weight": 15.2,
+      "segregationScore": 95,
+      "contaminationLevel": 5,
+      "timestamp": "2024-01-16T07:15:00Z",
+      "beforeImage": "/pickup-before-1.jpg",
+      "afterImage": "/pickup-after-1.jpg",
+      "location": {
+        "lat": 28.7041,
+        "lng": 77.1025
+      }
+    },
+    {
+      "id": "log-002",
+      "binId": "bin-002",
+      "collectorId": "col-001", 
+      "routeId": "route-001",
+      "wasteType": "dry",
+      "weight": 8.7,
+      "segregationScore": 88,
+      "contaminationLevel": 12,
+      "timestamp": "2024-01-16T07:45:00Z",
+      "beforeImage": "/pickup-before-2.jpg",
+      "afterImage": "/pickup-after-2.jpg",
+      "location": {
+        "lat": 28.7045,
+        "lng": 77.1028
+      }
+    },
+    {
+      "id": "log-003",
+      "binId": "bin-003",
+      "collectorId": "col-002",
+      "routeId": "route-002",
+      "wasteType": "hazardous",
+      "weight": 2.3,
+      "segregationScore": 92,
+      "contaminationLevel": 8,
+      "timestamp": "2024-01-16T08:20:00Z",
+      "beforeImage": "/pickup-before-3.jpg", 
+      "afterImage": "/pickup-after-3.jpg",
+      "location": {
+        "lat": 28.7038,
+        "lng": 77.1022
+      }
+    }
+  ],
+  "sensorData": {
+    "bin-001": [
+      {
+        "timestamp": "2024-01-16T06:00:00Z",
+        "fillLevel": 15,
+        "weight": 2.1,
+        "temperature": 23.5,
+        "humidity": 65,
+        "gasLevels": {
+          "methane": 12,
+          "ammonia": 8,
+          "hydrogen_sulfide": 3
+        },
+        "batteryLevel": 85
+      },
+      {
+        "timestamp": "2024-01-16T12:00:00Z", 
+        "fillLevel": 45,
+        "weight": 8.3,
+        "temperature": 26.2,
+        "humidity": 68,
+        "gasLevels": {
+          "methane": 18,
+          "ammonia": 12,
+          "hydrogen_sulfide": 5
+        },
+        "batteryLevel": 83
+      },
+      {
+        "timestamp": "2024-01-16T18:00:00Z",
+        "fillLevel": 72,
+        "weight": 13.7,
+        "temperature": 24.8,
+        "humidity": 72,
+        "gasLevels": {
+          "methane": 24,
+          "ammonia": 16,
+          "hydrogen_sulfide": 7
+        },
+        "batteryLevel": 82
+      }
+    ]
+  },
+  "rewardCatalog": [
+    {
+      "id": "reward-001",
+      "name": "Amazon Gift Card ₹500",
+      "pointsCost": 500,
+      "category": "gift_card",
+      "description": "Redeemable Amazon gift card for online shopping",
+      "availability": "in_stock",
+      "imageUrl": "/reward-amazon.jpg"
+    },
+    {
+      "id": "reward-002", 
+      "name": "Eco-friendly Shopping Bag Set",
+      "pointsCost": 150,
+      "category": "eco_product",
+      "description": "Set of 3 reusable jute shopping bags",
+      "availability": "in_stock",
+      "imageUrl": "/reward-bags.jpg"
+    },
+    {
+      "id": "reward-003",
+      "name": "Organic Compost (5kg)",
+      "pointsCost": 200,
+      "category": "garden",
+      "description": "Premium organic compost for home gardening",
+      "availability": "limited",
+      "imageUrl": "/reward-compost.jpg"
+    },
+    {
+      "id": "reward-004",
+      "name": "Stainless Steel Water Bottle",
+      "pointsCost": 300,
+      "category": "eco_product",
+      "description": "BPA-free stainless steel water bottle 750ml", 
+      "availability": "in_stock",
+      "imageUrl": "/reward-bottle.jpg"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-001",
+      "name": "Waste Warrior",
+      "description": "Maintain 90%+ segregation score for 30 days",
+      "icon": "🏆",
+      "pointsReward": 100,
+      "requirements": {
+        "segregationScore": 90,
+        "duration": 30
+      }
+    },
+    {
+      "id": "ach-002",
+      "name": "Plastic Buster",
+      "description": "Properly segregate 100kg of dry waste",
+      "icon": "♻️",
+      "pointsReward": 150,
+      "requirements": {
+        "dryWaste": 100
+      }
+    },
+    {
+      "id": "ach-003", 
+      "name": "Green Guardian",
+      "description": "Achieve zero contamination for 15 days",
+      "icon": "🌱",
+      "pointsReward": 75,
+      "requirements": {
+        "zeroContamination": 15
+      }
+    },
+    {
+      "id": "ach-004",
+      "name": "Eco Champion",
+      "description": "Complete 100 successful pickups", 
+      "icon": "🥇",
+      "pointsReward": 200,
+      "requirements": {
+        "successfulPickups": 100
+      }
+    },
+    {
+      "id": "ach-005",
+      "name": "Zero Waste Hero",
+      "description": "Maintain 95%+ segregation score for 90 days",
+      "icon": "⭐",
+      "pointsReward": 300,
+      "requirements": {
+        "segregationScore": 95,
+        "duration": 90
+      }
+    }
+  ],
+  "greenTips": [
+    {
+      "id": "tip-001",
+      "category": "composting",
+      "title": "Start Kitchen Composting",
+      "content": "Use fruit and vegetable peels to create nutrient-rich compost for your plants. Add brown materials like dry leaves for best results.",
+      "imageUrl": "/tip-compost.jpg"
+    },
+    {
+      "id": "tip-002",
+      "category": "recycling", 
+      "title": "Clean Before Recycling",
+      "content": "Rinse plastic containers and remove labels before putting them in the dry waste bin. This improves recycling efficiency.",
+      "imageUrl": "/tip-clean.jpg"
+    },
+    {
+      "id": "tip-003",
+      "category": "reduction",
+      "title": "Refuse Single-Use Plastics",
+      "content": "Carry reusable bags, water bottles, and containers. Say no to single-use items to reduce your waste footprint.",
+      "imageUrl": "/tip-reuse.jpg"
+    },
+    {
+      "id": "tip-004",
+      "category": "hazardous",
+      "title": "Safe Battery Disposal",
+      "content": "Never throw batteries in regular waste. Use designated collection points for safe disposal of hazardous materials.",
+      "imageUrl": "/tip-battery.jpg"
+    }
+  ],
+  "stories": [
+    {
+      "id": "story-001",
+      "title": "Green Valley Society's Zero Waste Journey",
+      "excerpt": "How a community of 200 households achieved 96% segregation rate in 6 months",
+      "content": "Green Valley Society started their waste segregation journey with just 45% compliance. Through education workshops, gamified challenges, and smart bin technology, they transformed their waste management practices. Today, they divert 78% of waste from landfills and have become a model for other communities.",
+      "author": "Priya Sharma, Society Secretary",
+      "date": "2024-01-10",
+      "imageUrl": "/story-green-valley.jpg",
+      "tags": ["community", "success", "education"]
+    },
+    {
+      "id": "story-002", 
+      "title": "From Contamination to Champion",
+      "excerpt": "The Gupta family's transformation from waste mixing to eco-warriors",
+      "content": "When the Gupta family first started using smart bins, their contamination rate was over 40%. Through consistent feedback, educational content, and the motivation of earning points, they gradually improved. Now they're among the top 10 households in their ward with a 94% segregation score.",
+      "author": "Ravi Gupta",
+      "date": "2024-01-08",
+      "imageUrl": "/story-gupta.jpg", 
+      "tags": ["individual", "improvement", "motivation"]
+    },
+    {
+      "id": "story-003",
+      "title": "Collector's Perspective: Technology Making a Difference",
+      "excerpt": "How smart routing and real-time data help waste collectors work more efficiently",
+      "content": "Rajesh Kumar has been a waste collector for 15 years. With the new smart bin system, his daily routes are optimized based on actual bin fill levels. He covers 30% more households in the same time and helps maintain cleaner neighborhoods. The job satisfaction has increased significantly.",
+      "author": "Rajesh Kumar, Waste Collector",
+      "date": "2024-01-05",
+      "imageUrl": "/story-collector.jpg",
+      "tags": ["collector", "efficiency", "technology"]
+    }
+  ]
+}
