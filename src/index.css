@@ -8,44 +8,59 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 120 20% 98%;
-    --foreground: 150 30% 15%;
+    --background: 120 25% 97%;
+    --foreground: 140 30% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 30% 15%;
+    --card-foreground: 140 30% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 30% 15%;
+    --popover-foreground: 140 30% 12%;
 
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 120 20% 95%;
-    --secondary-foreground: 150 30% 25%;
+    --secondary: 120 25% 92%;
+    --secondary-foreground: 140 30% 20%;
 
-    --muted: 120 15% 92%;
-    --muted-foreground: 150 15% 45%;
+    --muted: 120 20% 88%;
+    --muted-foreground: 140 15% 40%;
 
-    --accent: 195 85% 41%;
+    --accent: 195 85% 45%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 120 20% 85%;
-    --input: 120 20% 92%;
+    --border: 120 25% 82%;
+    --input: 120 25% 90%;
     --ring: 142 76% 36%;
 
-    --eco-green: 142 76% 36%;
-    --eco-light-green: 120 60% 50%;
-    --eco-blue: 195 85% 41%;
-    --eco-neutral: 45 25% 85%;
-    --eco-warning: 35 91% 65%;
-    --eco-success: 142 76% 36%;
-
-    --gradient-eco: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 60% 50%));
-    --gradient-blue: linear-gradient(135deg, hsl(195 85% 41%), hsl(210 85% 50%));
-    --shadow-soft: 0 4px 20px -5px hsl(var(--primary) / 0.15);
+    /* Bolt Innovator Brand Colors */
+    --brand-primary: 142 76% 36%;
+    --brand-secondary: 120 60% 50%;
+    --brand-accent: 195 85% 45%;
+    
+    /* Waste Categories */
+    --wet-waste: 120 60% 50%;
+    --dry-waste: 195 85% 45%;
+    --hazardous-waste: 0 84% 60%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --warning: 35 91% 65%;
+    --error: 0 84% 60%;
+    --info: 195 85% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 60% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(195 85% 45%), hsl(210 85% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36%), hsl(195 85% 45%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -8px hsl(var(--primary) / 0.15);
+    --shadow-medium: 0 8px 30px -12px hsl(var(--primary) / 0.2);
+    --shadow-strong: 0 20px 40px -16px hsl(var(--primary) / 0.25);
 
     --radius: 0.5rem;
 
@@ -67,44 +82,59 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 150 30% 8%;
-    --foreground: 120 20% 95%;
+    --background: 140 30% 8%;
+    --foreground: 120 25% 92%;
 
-    --card: 150 25% 12%;
-    --card-foreground: 120 20% 95%;
+    --card: 140 25% 10%;
+    --card-foreground: 120 25% 92%;
 
-    --popover: 150 25% 12%;
-    --popover-foreground: 120 20% 95%;
+    --popover: 140 25% 10%;
+    --popover-foreground: 120 25% 92%;
 
     --primary: 142 76% 45%;
-    --primary-foreground: 150 30% 8%;
+    --primary-foreground: 140 30% 8%;
 
-    --secondary: 150 20% 18%;
-    --secondary-foreground: 120 20% 95%;
+    --secondary: 140 20% 15%;
+    --secondary-foreground: 120 25% 92%;
 
-    --muted: 150 20% 15%;
+    --muted: 140 20% 12%;
     --muted-foreground: 120 15% 65%;
 
-    --accent: 195 85% 50%;
-    --accent-foreground: 150 30% 8%;
+    --accent: 195 85% 55%;
+    --accent-foreground: 140 30% 8%;
 
-    --destructive: 0 62.8% 50.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 150 20% 20%;
-    --input: 150 20% 18%;
+    --border: 140 20% 18%;
+    --input: 140 20% 15%;
     --ring: 142 76% 45%;
 
-    --eco-green: 142 76% 45%;
-    --eco-light-green: 120 60% 60%;
-    --eco-blue: 195 85% 50%;
-    --eco-neutral: 45 15% 25%;
-    --eco-warning: 35 91% 75%;
-    --eco-success: 142 76% 45%;
-
-    --gradient-eco: linear-gradient(135deg, hsl(142 76% 45%), hsl(120 60% 60%));
-    --gradient-blue: linear-gradient(135deg, hsl(195 85% 50%), hsl(210 85% 60%));
-    --shadow-soft: 0 4px 20px -5px hsl(var(--primary) / 0.25);
+    /* Dark mode brand colors */
+    --brand-primary: 142 76% 45%;
+    --brand-secondary: 120 60% 55%;
+    --brand-accent: 195 85% 55%;
+    
+    /* Dark mode waste categories */
+    --wet-waste: 120 60% 55%;
+    --dry-waste: 195 85% 55%;
+    --hazardous-waste: 0 84% 65%;
+    
+    /* Dark mode status colors */
+    --success: 142 76% 45%;
+    --warning: 35 91% 70%;
+    --error: 0 84% 65%;
+    --info: 195 85% 55%;
+    
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 45%), hsl(120 60% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(195 85% 55%), hsl(210 85% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 45%), hsl(195 85% 55%));
+    
+    /* Dark mode shadows */
+    --shadow-soft: 0 4px 20px -8px hsl(var(--primary) / 0.3);
+    --shadow-medium: 0 8px 30px -12px hsl(var(--primary) / 0.4);
+    --shadow-strong: 0 20px 40px -16px hsl(var(--primary) / 0.5);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
