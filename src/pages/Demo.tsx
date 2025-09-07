@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { useAppStore, type WasteType, type Classification } from '@/store/useAppStore';
 import { Camera, Upload, RefreshCw, CheckCircle, AlertTriangle, Sparkles, Eye, Key } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { chatGPTService } from '@/services/chatgptService';
+import { aiService } from '@/services/aiService';
 import { WasteChatbot } from '@/components/WasteChatbot';
 
 export const Demo = () => {
@@ -93,8 +93,8 @@ export const Demo = () => {
     try {
       if (useRealAI && apiKey) {
         // Real ChatGPT classification
-        chatGPTService.setApiKey(apiKey);
-        const aiResult = await chatGPTService.classifyWaste(imageData);
+        aiService.setApiKey(apiKey);
+        const aiResult = await aiService.classifyWaste(imageData);
         
         // Map AI response to our format
         const wasteTypeMap: { [key: string]: WasteType } = {

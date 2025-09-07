@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Send, Bot, User, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { chatGPTService } from '@/services/chatgptService';
+import { aiService } from '@/services/aiService';
 import { useAppStore } from '@/store/useAppStore';
 
 interface Message {
@@ -64,7 +64,7 @@ export const WasteChatbot = ({ apiKey }: WasteChatbotProps) => {
 
   useEffect(() => {
     if (localApiKey) {
-      chatGPTService.setApiKey(localApiKey);
+      aiService.setApiKey(localApiKey);
       // Add welcome message
       const welcomeMessage: Message = {
         id: 'welcome',
@@ -96,7 +96,7 @@ export const WasteChatbot = ({ apiKey }: WasteChatbotProps) => {
     setIsLoading(true);
 
     try {
-      const response = await chatGPTService.chatWithBot(inputValue);
+      const response = await aiService.chatWithBot(inputValue);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: response,
@@ -190,7 +190,7 @@ export const WasteChatbot = ({ apiKey }: WasteChatbotProps) => {
                         <Button
                           onClick={() => {
                             if (localApiKey) {
-                              chatGPTService.setApiKey(localApiKey);
+                              aiService.setApiKey(localApiKey);
                             }
                           }}
                           disabled={!localApiKey}

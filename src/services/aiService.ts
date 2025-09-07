@@ -1,7 +1,9 @@
-interface ChatGPTResponse {
-  choices: {
-    message: {
-      content: string;
+interface GeminiResponse {
+  candidates: {
+    content: {
+      parts: {
+        text: string;
+      }[];
     };
   }[];
 }
@@ -13,18 +15,14 @@ interface WasteClassificationResult {
   reasoning: string;
 }
 
-class ChatGPTService {
-  private apiKey: string | null = null;
+class AIService {
+  private apiKey: string = "AIzaSyBsDwFhmqIJzj3ahe9N9fhR5iy1_AKFzbQ";
 
   setApiKey(apiKey: string) {
     this.apiKey = apiKey;
   }
 
   async classifyWaste(imageBase64: string): Promise<WasteClassificationResult> {
-    if (!this.apiKey) {
-      throw new Error('API key not set. Please configure your OpenAI API key.');
-    }
-
     const prompt = `Analyze this waste item image and classify it into one of these categories:
     - Organic: Food scraps, biodegradable materials
     - Inorganic: Recyclable materials like plastic, glass, metal, paper
@@ -39,30 +37,30 @@ class ChatGPTService {
     }`;
 
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      // Convert base64 to the format Gemini expects
+      const base64Data = imageBase64.replace(/^data:image\/[a-z]+;base64,/, '');
+      
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'gpt-4o',
-          messages: [
-            {
-              role: 'user',
-              content: [
-                { type: 'text', text: prompt },
-                {
-                  type: 'image_url',
-                  image_url: {
-                    url: imageBase64,
-                  },
-                },
-              ],
-            },
-          ],
-          max_tokens: 300,
-          temperature: 0.1,
+          contents: [{
+            parts: [
+              { text: prompt },
+              {
+                inline_data: {
+                  mime_type: "image/jpeg",
+                  data: base64Data
+                }
+              }
+            ]
+          }],
+          generationConfig: {
+            temperature: 0.1,
+            maxOutputTokens: 300,
+          }
         }),
       });
 
@@ -70,8 +68,8 @@ class ChatGPTService {
         throw new Error(`API request failed: ${response.statusText}`);
       }
 
-      const data: ChatGPTResponse = await response.json();
-      const content = data.choices[0]?.message?.content;
+      const data: GeminiResponse = await response.json();
+      const content = data.candidates[0]?.content?.parts[0]?.text;
       
       if (!content) {
         throw new Error('No response from API');
@@ -95,12 +93,8 @@ class ChatGPTService {
   }
 
   async chatWithBot(message: string): Promise<string> {
-    if (!this.apiKey) {
-      throw new Error('API key not set. Please configure your OpenAI API key.');
-    }
-
     const systemPrompt = `You are EcoBot, a helpful AI assistant specialized in waste management and environmental sustainability. 
-    
+
     Your expertise includes:
     - Waste segregation and disposal methods
     - Recycling guidelines and best practices  
@@ -112,20 +106,21 @@ class ChatGPTService {
     Provide clear, actionable advice. Keep responses concise but informative. Use emojis appropriately to make responses engaging.`;
 
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'gpt-4o',
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: message }
-          ],
-          max_tokens: 500,
-          temperature: 0.7,
+          contents: [{
+            parts: [
+              { text: `${systemPrompt}\n\nUser: ${message}` }
+            ]
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 500,
+          }
         }),
       });
 
@@ -133,8 +128,8 @@ class ChatGPTService {
         throw new Error(`API request failed: ${response.statusText}`);
       }
 
-      const data: ChatGPTResponse = await response.json();
-      return data.choices[0]?.message?.content || 'Sorry, I could not process your request.';
+      const data: GeminiResponse = await response.json();
+      return data.candidates[0]?.content?.parts[0]?.text || 'Sorry, I could not process your request.';
     } catch (error) {
       console.error('Chat error:', error);
       throw error;
@@ -142,4 +137,4 @@ class ChatGPTService {
   }
 }
 
-export const chatGPTService = new ChatGPTService();
+export const aiService = new AIService();
