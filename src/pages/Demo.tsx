@@ -33,7 +33,7 @@ export const Demo = () => {
       edgeMode: "Mock Mode",
       edgeModeDesc: "Use simulated classification",
       realAI: "Real AI Mode",
-      realAIDesc: "Use Gemini AI for classification",
+      realAIDesc: "Use ChatGPT AI for classification",
       results: "AI Classification Results",
       confidence: "Confidence",
       predicted: "Predicted Category",
@@ -61,7 +61,7 @@ export const Demo = () => {
       edgeMode: "मॉक मोड",
       edgeModeDesc: "सिमुलेटेड वर्गीकरण का उपयोग करें",
       realAI: "वास्तविक AI मोड",
-      realAIDesc: "वर्गीकरण के लिए Gemini AI का उपयोग करें",
+      realAIDesc: "वर्गीकरण के लिए ChatGPT AI का उपयोग करें",
       results: "AI वर्गीकरण परिणाम",
       confidence: "आत्मविश्वास",
       predicted: "अनुमानित श्रेणी",
@@ -89,7 +89,7 @@ export const Demo = () => {
     
     try {
       if (useRealAI) {
-        // Real Gemini AI classification - API key is already set in service
+        // Real ChatGPT AI classification - API key is already set in service
         const aiResult = await aiService.classifyWaste(imageData);
         
         // Map AI response to our format
@@ -300,7 +300,7 @@ export const Demo = () => {
                 {useRealAI ? "🤖 AI Classification Active" : "🔄 Mock Mode Active"}
               </Badge>
               <p className="text-xs text-muted-foreground mt-1">
-                {useRealAI ? "Images will be automatically classified using Gemini AI" : "Using simulated classification"}
+                {useRealAI ? "Images will be automatically classified using ChatGPT AI" : "Using simulated classification"}
               </p>
             </div>
           </div>
