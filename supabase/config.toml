@@ -1,1 +1,14 @@
 project_id = "iryafwncdeknceznkoff"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public"]
+max_rows = 1000
+
+[functions.classify-waste]
+verify_jwt = false
+
+[functions.chat-with-bot]
+verify_jwt = false
