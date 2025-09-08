@@ -110,19 +110,27 @@ export const Demo = () => {
         setResult(classification);
         addClassification(classification);
       } else {
-        // Mock classification (fallback)
+        // Improved mock classification with more realistic results
         const processingTime = edgeMode ? 800 : 2000;
         await new Promise(resolve => setTimeout(resolve, processingTime));
         
-        const categories: WasteType[] = ['wet', 'dry', 'hazardous'];
-        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const confidence = Math.random() * 0.4 + 0.6; // 60-100% confidence
+        // Simulate more realistic classification based on common waste items
+        const mockResults: Array<{category: WasteType, confidence: number, tips: string, reasoning: string}> = [
+          { category: 'wet', confidence: 0.85, tips: 'Compost this organic waste in your garden or green bin', reasoning: 'Appears to be food waste or organic material' },
+          { category: 'dry', confidence: 0.90, tips: 'Clean and place in recycling bin', reasoning: 'Recyclable material like plastic, paper, or metal' },
+          { category: 'dry', confidence: 0.88, tips: 'Remove labels and caps before recycling', reasoning: 'Plastic container - check recycling guidelines' },
+          { category: 'wet', confidence: 0.92, tips: 'Great for composting! Will decompose naturally', reasoning: 'Organic kitchen waste' },
+          { category: 'hazardous', confidence: 0.95, tips: 'Take to e-waste center or hazardous waste facility', reasoning: 'Electronic or hazardous material requiring special disposal' },
+          { category: 'dry', confidence: 0.87, tips: 'Flatten and place with cardboard recycling', reasoning: 'Paper or cardboard material' }
+        ];
+        
+        const randomResult = mockResults[Math.floor(Math.random() * mockResults.length)];
         
         const classification: Classification = {
           id: `cls-${Date.now()}`,
           image: imageData,
-          predictedClass: randomCategory,
-          confidence: Math.round(confidence * 100),
+          predictedClass: randomResult.category,
+          confidence: Math.round(randomResult.confidence * 100),
           timestamp: new Date().toISOString()
         };
         
@@ -131,15 +139,20 @@ export const Demo = () => {
       }
     } catch (error) {
       console.error('Classification error:', error);
-      // Fall back to mock classification on error
-      const categories: WasteType[] = ['wet', 'dry', 'hazardous'];
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+      // Fall back to improved mock classification on error
+      const mockResults: Array<{category: WasteType, confidence: number, tips: string, reasoning: string}> = [
+        { category: 'dry', confidence: 75, tips: 'Please check local disposal guidelines', reasoning: 'Unable to classify - assuming recyclable' },
+        { category: 'wet', confidence: 70, tips: 'If organic, compost safely', reasoning: 'Defaulting to organic waste category' },
+        { category: 'dry', confidence: 72, tips: 'Clean before recycling if possible', reasoning: 'Most likely recyclable material' }
+      ];
+      
+      const fallbackResult = mockResults[Math.floor(Math.random() * mockResults.length)];
       
       const classification: Classification = {
         id: `cls-${Date.now()}`,
         image: imageData,
-        predictedClass: randomCategory,
-        confidence: 75,
+        predictedClass: fallbackResult.category,
+        confidence: fallbackResult.confidence,
         timestamp: new Date().toISOString()
       };
       
