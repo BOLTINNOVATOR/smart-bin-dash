@@ -16,8 +16,7 @@ export const Demo = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState<Classification | null>(null);
   const [edgeMode, setEdgeMode] = useState(false);
-  const [useRealAI, setUseRealAI] = useState(false);
-  const [apiKey, setApiKey] = useState('');
+  const [useRealAI, setUseRealAI] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLVideoElement>(null);
   const [cameraActive, setCameraActive] = useState(false);
@@ -26,7 +25,7 @@ export const Demo = () => {
   const content = {
     en: {
       title: "AI-Powered Waste Classification",
-      subtitle: "Upload, capture, or drag images for intelligent waste sorting with ChatGPT",
+      subtitle: "Upload, capture, or drag images for intelligent waste sorting with AI",
       upload: "Upload Image",
       camera: "Use Camera",
       process: "Classify Waste",
@@ -34,8 +33,7 @@ export const Demo = () => {
       edgeMode: "Mock Mode",
       edgeModeDesc: "Use simulated classification",
       realAI: "Real AI Mode",
-      realAIDesc: "Use ChatGPT for classification",
-      apiKey: "OpenAI API Key",
+      realAIDesc: "Use Gemini AI for classification",
       results: "AI Classification Results",
       confidence: "Confidence",
       predicted: "Predicted Category",
@@ -55,7 +53,7 @@ export const Demo = () => {
     },
     hi: {
       title: "AI-संचालित अपशिष्ट वर्गीकरण",
-      subtitle: "ChatGPT के साथ बुद्धिमान अपशिष्ट छँटाई के लिए चित्र अपलोड, कैप्चर या खींचें",
+      subtitle: "AI के साथ बुद्धिमान अपशिष्ट छँटाई के लिए चित्र अपलोड, कैप्चर या खींचें",
       upload: "चित्र अपलोड करें",
       camera: "कैमरा का उपयोग करें", 
       process: "अपशिष्ट वर्गीकृत करें",
@@ -63,8 +61,7 @@ export const Demo = () => {
       edgeMode: "मॉक मोड",
       edgeModeDesc: "सिमुलेटेड वर्गीकरण का उपयोग करें",
       realAI: "वास्तविक AI मोड",
-      realAIDesc: "वर्गीकरण के लिए ChatGPT का उपयोग करें",
-      apiKey: "OpenAI API कुंजी",
+      realAIDesc: "वर्गीकरण के लिए Gemini AI का उपयोग करें",
       results: "AI वर्गीकरण परिणाम",
       confidence: "आत्मविश्वास",
       predicted: "अनुमानित श्रेणी",
@@ -91,9 +88,8 @@ export const Demo = () => {
     setIsProcessing(true);
     
     try {
-      if (useRealAI && apiKey) {
-        // Real ChatGPT classification
-        aiService.setApiKey(apiKey);
+      if (useRealAI) {
+        // Real Gemini AI classification - API key is already set in service
         const aiResult = await aiService.classifyWaste(imageData);
         
         // Map AI response to our format
@@ -152,7 +148,7 @@ export const Demo = () => {
     } finally {
       setIsProcessing(false);
     }
-  }, [edgeMode, useRealAI, apiKey, addClassification]);
+  }, [edgeMode, useRealAI, addClassification]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -167,6 +163,8 @@ export const Demo = () => {
       const imageData = e.target?.result as string;
       setSelectedImage(imageData);
       setResult(null);
+      // Automatically classify the uploaded image
+      classifyImage(imageData);
     };
     reader.readAsDataURL(file);
   };
@@ -212,6 +210,8 @@ export const Demo = () => {
       const imageData = canvas.toDataURL('image/jpeg');
       setSelectedImage(imageData);
       setResult(null);
+      // Automatically classify the captured image
+      classifyImage(imageData);
       
       // Stop camera
       const stream = cameraRef.current.srcObject as MediaStream;
@@ -281,26 +281,15 @@ export const Demo = () => {
               </Button>
             </div>
             
-            {/* API Key Input */}
-            <AnimatePresence>
-              {useRealAI && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="flex items-center gap-2 w-full max-w-md"
-                >
-                  <Key className="h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="password"
-                    placeholder={t.apiKey}
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                    className="flex-1"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Status Indicator */}
+            <div className="text-center">
+              <Badge variant="secondary" className="bg-primary/10 text-primary">
+                {useRealAI ? "🤖 AI Classification Active" : "🔄 Mock Mode Active"}
+              </Badge>
+              <p className="text-xs text-muted-foreground mt-1">
+                {useRealAI ? "Images will be automatically classified using Gemini AI" : "Using simulated classification"}
+              </p>
+            </div>
           </div>
         </motion.div>
 
@@ -420,29 +409,21 @@ export const Demo = () => {
                       transition={{ duration: 0.2 }}
                     />
                     
-                    {/* Process Button */}
-                    <Button
-                      onClick={() => classifyImage(selectedImage)}
-                      disabled={isProcessing || (useRealAI && !apiKey)}
-                      className="w-full flex items-center gap-2 relative overflow-hidden"
-                    >
-                      {isProcessing ? (
-                        <>
-                          <RefreshCw className="h-4 w-4 animate-spin" />
-                          {t.processing}
-                        </>
-                      ) : (
-                        <>
-                          <CheckCircle className="h-4 w-4" />
-                          {t.process}
-                        </>
-                      )}
-                    </Button>
+                    {/* Auto Classification Status */}
+                    {isProcessing && (
+                      <div className="w-full flex items-center justify-center gap-2 p-4 bg-primary/5 rounded-lg border">
+                        <RefreshCw className="h-4 w-4 animate-spin text-primary" />
+                        <span className="text-sm text-primary font-medium">{t.processing}</span>
+                      </div>
+                    )}
                     
-                    {useRealAI && !apiKey && (
-                      <p className="text-sm text-warning text-center">
-                        Please enter your OpenAI API key above
-                      </p>
+                    {!isProcessing && selectedImage && !result && (
+                      <div className="w-full flex items-center justify-center gap-2 p-3 bg-muted/50 rounded-lg">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">
+                          {useRealAI ? "AI classification completed" : "Ready for classification"}
+                        </span>
+                      </div>
                     )}
                   </motion.div>
                 )}
@@ -461,7 +442,7 @@ export const Demo = () => {
                   🤖
                 </motion.span>
                 {t.results}
-                {useRealAI && apiKey && (
+                {useRealAI && (
                   <Badge variant="outline" className="ml-2">
                     <Sparkles className="h-3 w-3 mr-1" />
                     AI Powered
@@ -567,7 +548,7 @@ export const Demo = () => {
                     >
                       <div>Classification ID: {result.id}</div>
                       <div>Timestamp: {new Date(result.timestamp).toLocaleString()}</div>
-                      <div>Mode: {useRealAI && apiKey ? 'AI-Powered' : 'Mock Classification'}</div>
+                      <div>Mode: {useRealAI ? 'AI-Powered' : 'Mock Classification'}</div>
                     </motion.div>
                   </motion.div>
                 )}
@@ -637,7 +618,7 @@ export const Demo = () => {
         </Card>
         
         {/* AI Chatbot */}
-        <WasteChatbot apiKey={apiKey} />
+        <WasteChatbot />
       </div>
     </div>
   );
