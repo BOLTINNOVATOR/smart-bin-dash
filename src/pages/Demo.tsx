@@ -300,7 +300,7 @@ export const Demo = () => {
                 {useRealAI ? "🤖 AI Classification Active" : "🔄 Mock Mode Active"}
               </Badge>
               <p className="text-xs text-muted-foreground mt-1">
-                {useRealAI ? "Images will be automatically classified using ChatGPT AI" : "Using simulated classification"}
+                {useRealAI ? "🚀 CNN MODEL IS COMING SOON - Advanced deep learning classification" : "Using simulated classification"}
               </p>
             </div>
           </div>
