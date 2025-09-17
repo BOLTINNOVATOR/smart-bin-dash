@@ -24,7 +24,7 @@ export const Demo = () => {
 
   const content = {
     en: {
-      title: "AI-Powered Waste Classification",
+      title: "Waste Classification using CNN MODEL",
       subtitle: "Upload, capture, or drag images for intelligent waste sorting with AI",
       upload: "Upload Image",
       camera: "Use Camera",
@@ -52,7 +52,7 @@ export const Demo = () => {
       }
     },
     hi: {
-      title: "AI-संचालित अपशिष्ट वर्गीकरण",
+      title: "CNN MODEL का उपयोग करके अपशिष्ट वर्गीकरण",
       subtitle: "AI के साथ बुद्धिमान अपशिष्ट छँटाई के लिए चित्र अपलोड, कैप्चर या खींचें",
       upload: "चित्र अपलोड करें",
       camera: "कैमरा का उपयोग करें", 
